@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog | TripWallet Insights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        .blog-post {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: white;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .blog-post:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .post-thumb {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+        }
+        .post-content {
+            padding: 2rem;
+        }
+        .post-tag {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .post-excerpt {
+            color: var(--muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .author-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i data-lucide="wallet"></i>
+                TripWallet
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="index.html#tracker" class="btn btn-primary">Start Planning</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="reveal">Travel <span class="text-gradient">Insights</span></h1>
+            <p class="reveal">Expert tips on budgeting, planning, and making the most of your trips.</p>
+        </div>
+    </header>
+
+    <!-- Blog Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Post 1 -->
+                <article class="blog-post reveal">
+                    <div class="post-thumb" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800');"></div>
+                    <div class="post-content">
+                        <span class="post-tag">Budgeting</span>
+                        <h2 class="post-title">10 Ways to Save Money on Your Next Europe Trip</h2>
+                        <p class="post-excerpt">From hidden hostel gems to local transport hacks, here's how to explore Europe on a budget.</p>
+                        <div class="post-author">
+                            <div class="author-img"></div>
+                            <div>
+                                <h4 style="font-size: 0.9rem;">Sarah Jenkins</h4>
+                                <p style="font-size: 0.8rem; color: var(--muted);">Apr 10, 2026 • 5 min read</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-post reveal">
+                    <div class="post-thumb" style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&q=80&w=800');"></div>
+                    <div class="post-content">
+                        <span class="post-tag">Tech</span>
+                        <h2 class="post-title">Why Every Traveler Needs an Expense Tracker</h2>
+                        <p class="post-excerpt">Manual tracking is dead. Discover how digital tools can save you from financial stress.</p>
+                        <div class="post-author">
+                            <div class="author-img"></div>
+                            <div>
+                                <h4 style="font-size: 0.9rem;">Mark Rivera</h4>
+                                <p style="font-size: 0.8rem; color: var(--muted);">Apr 08, 2026 • 4 min read</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-post reveal">
+                    <div class="post-thumb" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800');"></div>
+                    <div class="post-content">
+                        <span class="post-tag">Planning</span>
+                        <h2 class="post-title">How to Plan a Group Trip Without Losing Friends</h2>
+                        <p class="post-excerpt">Splitting costs and agreeing on itineraries can be tough. We've got the solution.</p>
+                        <div class="post-author">
+                            <div class="author-img"></div>
+                            <div>
+                                <h4 style="font-size: 0.9rem;">Leila Chen</h4>
+                                <p style="font-size: 0.8rem; color: var(--muted);">Apr 05, 2026 • 7 min read</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer same as others -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <div class="footer-logo">TripWallet</div>
+                    <p class="footer-description">Making travel finance simple and stress-free for adventures around the globe.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul class="footer-links" id="footer-links-container">
+                        <!-- Links here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

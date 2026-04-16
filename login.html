@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TripWallet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+        }
+        .login-card {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .login-card .logo {
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--muted);
+            margin: 2rem 0;
+            font-size: 0.85rem;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card reveal">
+        <a href="index.html" class="logo">
+            <i data-lucide="wallet"></i>
+            TripWallet
+        </a>
+        <h2>Welcome Back</h2>
+        <p style="color: var(--muted);">Enter your credentials to access your trips.</p>
+
+        <div class="social-login">
+            <button class="btn btn-outline" style="padding: 0.75rem;"><img src="https://www.google.com/favicon.ico" width="16"> Google</button>
+            <button class="btn btn-outline" style="padding: 0.75rem;"><i data-lucide="github"></i> Github</button>
+        </div>
+
+        <div class="divider">OR CONTINUE WITH</div>
+
+        <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+            <div class="input-group" style="text-align: left;">
+                <label>Email Address</label>
+                <input type="email" placeholder="name@company.com" required>
+            </div>
+            <div class="input-group" style="text-align: left;">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
+        </form>
+
+        <p style="margin-top: 2rem; color: var(--muted); font-size: 0.9rem;">
+            Don't have an account? <a href="signup.html" style="color: var(--primary); font-weight: 600;">Sign up</a>
+        </p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

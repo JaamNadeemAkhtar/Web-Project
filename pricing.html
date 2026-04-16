@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans | TripWallet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .pricing-card {
+            padding: 3rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: white;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .pricing-card.popular {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+        }
+        .price span {
+            font-size: 1rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--muted);
+        }
+        .pricing-features i {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i data-lucide="wallet"></i>
+                TripWallet
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="index.html#tracker" class="btn btn-primary">Start Planning</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="reveal">Simple <span class="text-gradient">Pricing</span></h1>
+            <p class="reveal">Choose the plan that fits your travel style. No hidden fees, just great tools.</p>
+        </div>
+    </header>
+
+    <!-- Pricing Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Free -->
+                <div class="pricing-card reveal">
+                    <h3>Free</h3>
+                    <p>For casual explorers</p>
+                    <div class="price">Rs. 0<span>/forever</span></div>
+                    <ul class="pricing-features">
+                        <li><i data-lucide="check"></i> 1 Active Trip</li>
+                        <li><i data-lucide="check"></i> Manual Expense Logging</li>
+                        <li><i data-lucide="check"></i> 50+ Currencies</li>
+                        <li><i data-lucide="check"></i> Basic Statistics</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Get Started</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card popular reveal">
+                    <div class="badge">BEST VALUE</div>
+                    <h3>Pro</h3>
+                    <p>For frequent travelers</p>
+                    <div class="price">Rs. 2,500<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i data-lucide="check"></i> Unlimited Trips</li>
+                        <li><i data-lucide="check"></i> AI Receipt Scanner</li>
+                        <li><i data-lucide="check"></i> 150+ Currencies</li>
+                        <li><i data-lucide="check"></i> Shared Group Trips</li>
+                        <li><i data-lucide="check"></i> Cloud Sync</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Go Pro</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card reveal">
+                    <h3>Nomad</h3>
+                    <p>For professional travelers</p>
+                    <div class="price">Rs. 5,500<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i data-lucide="check"></i> All Pro Features</li>
+                        <li><i data-lucide="check"></i> Priority Support</li>
+                        <li><i data-lucide="check"></i> Advanced Analytics</li>
+                        <li><i data-lucide="check"></i> Multi-Device Sync</li>
+                        <li><i data-lucide="check"></i> PDF & CSV Exports</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <div class="footer-logo">TripWallet</div>
+                    <p class="footer-description">Making travel finance simple and stress-free for adventures around the globe.</p>
+                </div>
+                <!-- ... links same as others ... -->
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripWallet | Smart Tour Planner & Expense Tracker</title>
+    <meta name="description" content="Plan your trips smartly, set budgets, and track every expense with TripWallet. The ultimate tool for modern travelers.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i data-lucide="wallet"></i>
+                TripWallet
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="login.html" class="nav-links" style="text-decoration: none; font-weight: 500; display: block;">Login</a>
+                <a href="index.html#tracker" class="btn btn-primary">Start Planning</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content reveal">
+                <h1>Plan Your Trip <span class="text-gradient">Smartly</span> & Track Every Expense</h1>
+                <p>The #1 rated platform for travelers to manage their budgets, track spending in real-time, and split costs with friends. Perfect for solo travelers and group adventures alike.</p>
+                <div class="hero-actions">
+                    <a href="#tracker" class="btn btn-primary">Start Planning Now</a>
+                    <a href="#features" class="btn btn-outline">
+                        <i data-lucide="play-circle"></i>
+                        See Features
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image reveal">
+                <img src="hero-preview.png" alt="TripWallet Dashboard Preview">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding features" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Designed for the Modern Traveler</h2>
+                <p>Everything you need to keep your travel finances in check, wrapped in a beautiful interface.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i data-lucide="map"></i></div>
+                    <h3>Trip Planning</h3>
+                    <p>Organize multiple trips with ease. Set dates, destinations, and initial estimates in seconds.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+                    <h3>Expense Tracking</h3>
+                    <p>Log expenses on the go. Categorize spending to see exactly where your money is going.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i data-lucide="pie-chart"></i></div>
+                    <h3>Budget Control</h3>
+                    <p>Set a ceiling for your trip and get real-time alerts as you approach your limit.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i data-lucide="smartphone"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Access your wallet from any device. Mobile-first design ensures a smooth experience everywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-padding" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>How It Works</h2>
+                <p>Simple steps to financial peace of mind during your adventures.</p>
+            </div>
+            
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <i data-lucide="plus-circle" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Create Trip</h4>
+                    <p>Enter your destination and travel dates.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <i data-lucide="dollar-sign" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Set Budget</h4>
+                    <p>Define your total spending limit for the trip.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <i data-lucide="list-plus" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Add Expenses</h4>
+                    <p>Log spending as it happens during your tour.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">4</div>
+                    <i data-lucide="bar-chart-3" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>Track Balance</h4>
+                    <p>View remaining balance and adjust accordingly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section class="dashboard-preview-section">
+        <div class="container">
+            <div class="reveal">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Powerful Insights at Your <span class="text-gradient">Fingertips</span></h2>
+                <p style="color: #94a3b8; font-size: 1.25rem; margin-bottom: 2rem;">Stop worrying about paper receipts. Our dashboard gives you a crystal clear view of your financial health throughout your journey.</p>
+                <ul style="list-style: none; color: #94a3b8; margin-bottom: 2.5rem;">
+                    <li style="margin-bottom: 1rem;"><i data-lucide="check-circle-2" style="color: var(--accent); vertical-align: middle; margin-right: 0.5rem;"></i> Automatic currency conversion</li>
+                    <li style="margin-bottom: 1rem;"><i data-lucide="check-circle-2" style="color: var(--accent); vertical-align: middle; margin-right: 0.5rem;"></i> Visual spending charts</li>
+                    <li style="margin-bottom: 1rem;"><i data-lucide="check-circle-2" style="color: var(--accent); vertical-align: middle; margin-right: 0.5rem;"></i> Export data for later review</li>
+                </ul>
+            </div>
+            <div class="dashboard-mockup reveal">
+                <img src="hero-preview.png" alt="Dashboard Mockup">
+            </div>
+        </div>
+    </section>
+
+    <!-- Functional Tracker Section -->
+    <section class="section-padding tracker-section" id="tracker">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Quick Tracker</h2>
+                <p>Try it out! Set a budget and add some test expenses below.</p>
+            </div>
+
+            <div class="tracker-container reveal">
+                <div class="tracker-grid">
+                    <div class="tracker-form">
+                        <h3>Plan Your Spending</h3>
+                        <div class="input-group">
+                            <label for="budget-input">Initial Budget (Rs)</label>
+                            <input type="number" id="budget-input" placeholder="e.g. 5000">
+                        </div>
+                        <button class="btn btn-primary" id="set-budget-btn" style="width: 100%; margin-bottom: 2rem;">Set Trip Budget</button>
+
+                        <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 2rem;">
+
+                        <div class="input-group">
+                            <label for="expense-name">Expense Title</label>
+                            <input type="text" id="expense-name" placeholder="Hotel, Dinner, etc.">
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-amount">Amount (Rs)</label>
+                            <input type="number" id="expense-amount" placeholder="0.00">
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-category">Category</label>
+                            <select id="expense-category">
+                                <option value="Accommodation">Accommodation</option>
+                                <option value="Food & Dining">Food & Dining</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Activities">Activities</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Miscellaneous">Miscellaneous</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline" id="add-expense-btn" style="width: 100%; border-color: var(--primary); color: var(--primary);">Add Expense</button>
+                    </div>
+
+                    <div class="tracker-display">
+                        <div class="stats">
+                            <div class="stat-card">
+                                <h4>Budget</h4>
+                                <div class="value" id="total-budget-value">Rs0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Spent</h4>
+                                <div class="value" id="total-expenses-value">Rs0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Balance</h4>
+                                <div class="value" id="remaining-balance-value">Rs0</div>
+                            </div>
+                        </div>
+
+                        <div class="expense-list-container">
+                            <div class="expense-list-header">
+                                <h4 style="font-weight: 700;">Recent Expenses</h4>
+                            </div>
+                            <div class="expense-list" id="expense-list">
+                                <div class="expense-item" style="justify-content: center; color: var(--muted)">
+                                    No expenses added yet
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Comparison Section -->
+    <section class="section-padding" style="background: var(--surface);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Why Choose TripWallet?</h2>
+                <p>Compare us with traditional methods.</p>
+            </div>
+            <div class="reveal" style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 1px solid var(--border);">
+                            <th style="padding: 2rem;">Feature</th>
+                            <th style="padding: 2rem;">Cash & Notebooks</th>
+                            <th style="padding: 2rem;">Basic Spreadsheets</th>
+                            <th style="padding: 2rem; color: var(--primary);">TripWallet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1.5rem 2rem;">Real-time Conversion</td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="x" style="color: #ef4444;"></i></td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="x" style="color: #ef4444;"></i></td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="check" style="color: var(--accent);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1.5rem 2rem;">Receipt Scanning</td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="x" style="color: #ef4444;"></i></td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="x" style="color: #ef4444;"></i></td>
+                            <td style="padding: 1.5rem 2rem;"><i data-lucide="check" style="color: var(--accent);"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1.5rem 2rem;">Group Splitting</td>
+                            <td style="padding: 1.5rem 2rem;">Manual</td>
+                            <td style="padding: 1.5rem 2rem;">Complex</td>
+                            <td style="padding: 1.5rem 2rem; color: var(--primary); font-weight: 700;">Automatic</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container reveal">
+        <div class="cta section-padding">
+            <h2>Start planning your journey today</h2>
+            <p>Join over 100,000 travelers who use TripWallet to manage their money and enjoy their trips to the fullest.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#tracker" class="btn btn-white btn">Start Now — It's Free</a>
+                <a href="features.html" class="btn btn-outline" style="background: transparent; color: white; border-color: rgba(255,255,255,0.3);">View All Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <div class="footer-logo">TripWallet</div>
+                    <p class="footer-description">Making travel finance simple and stress-free for adventures around the globe.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="index.html#tracker">Tracker</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TripWallet Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
