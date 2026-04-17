@@ -93,11 +93,14 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside>
-            <div class="logo" style="margin-bottom: 3rem;">
-                <i data-lucide="wallet"></i>
-                TripWallet
+            <div class="logo" style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="wallet"></i>
+                    TripWallet
+                </div>
             </div>
-            <nav style="position: static; background: transparent; backdrop-filter: none; border-bottom: none; padding: 0;">
+            <nav class="side-nav">
+
                 <a href="#" class="side-link active"><i data-lucide="layout-dashboard"></i> Dashboard</a>
                 <a href="#" class="side-link"><i data-lucide="map"></i> My Trips</a>
                 <a href="#" class="side-link"><i data-lucide="receipt"></i> Transactions</a>
@@ -112,7 +115,11 @@
         <!-- Main Content -->
         <main>
             <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                <button id="dashboard-menu-toggle" class="menu-toggle" style="display: none; margin-bottom: 0;">
+                    <i data-lucide="menu"></i>
+                </button>
                 <div>
+
                     <h1>Welcome back, <span class="text-gradient">Traveler!</span></h1>
                     <p style="color: var(--muted);">You have 2 active trips and 1 upcoming trip.</p>
                 </div>

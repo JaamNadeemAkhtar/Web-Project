@@ -9,51 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--surface);
-        }
-        .login-card {
-            background: white;
-            padding: 3rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-        }
-        .login-card .logo {
-            justify-content: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-        .social-login {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--muted);
-            margin: 2rem 0;
-            font-size: 0.85rem;
-        }
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-    </style>
 </head>
-<body>
+<body class="auth-body">
+
 
     <div class="login-card reveal">
         <a href="index.html" class="logo">

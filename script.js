@@ -130,3 +130,51 @@ window.addEventListener('scroll', () => {
         nav.style.boxShadow = 'none';
     }
 });
+
+// Mobile Menu Toggle
+const menuToggle = document.createElement('button');
+menuToggle.className = 'menu-toggle';
+menuToggle.innerHTML = '<i data-lucide="menu"></i>';
+document.querySelector('nav .container').appendChild(menuToggle);
+lucide.createIcons();
+
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = menuToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+        icon.setAttribute('data-lucide', 'x');
+    } else {
+        icon.setAttribute('data-lucide', 'menu');
+    }
+    lucide.createIcons();
+});
+
+// Close menu when link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.querySelector('i').setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+    });
+});
+
+// Dashboard Sidebar Toggle
+const dashMenuToggle = document.getElementById('dashboard-menu-toggle');
+const aside = document.querySelector('aside');
+
+if (dashMenuToggle && aside) {
+    dashMenuToggle.addEventListener('click', () => {
+        aside.classList.toggle('active');
+        const icon = dashMenuToggle.querySelector('i');
+        if (aside.classList.contains('active')) {
+            icon.setAttribute('data-lucide', 'x');
+        } else {
+            icon.setAttribute('data-lucide', 'menu');
+        }
+        lucide.createIcons();
+    });
+}
+
+
