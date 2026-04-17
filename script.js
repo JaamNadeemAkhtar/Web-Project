@@ -178,3 +178,15 @@ if (dashMenuToggle && aside) {
 }
 
 
+// Hero Slider Logic
+const slides = document.querySelectorAll('.hero-slide');
+if (slides.length > 0) {
+    let currentSlide = 0;
+    const slideInterval = 7000; // 7 seconds
+
+    setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, slideInterval);
+}
