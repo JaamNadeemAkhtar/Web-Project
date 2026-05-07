@@ -2,10 +2,12 @@
 let budget = parseFloat(localStorage.getItem('tripBudget')) || 0;
 let expenses = JSON.parse(localStorage.getItem('tripExpenses')) || [];
 let currency = localStorage.getItem('tripCurrency') || 'Rs.';
+let destination = localStorage.getItem('tripDestination') || '';
 
 // DOM Elements
 const budgetInput = document.getElementById('budget-input');
 const setBudgetBtn = document.getElementById('set-budget-btn');
+const tripDestinationInput = document.getElementById('trip-destination');
 const currencySelect = document.getElementById('currency-select');
 const expenseNameInput = document.getElementById('expense-name');
 const expenseAmountInput = document.getElementById('expense-amount');
@@ -21,15 +23,22 @@ const dashBudget = document.getElementById('dash-budget');
 const dashSpent = document.getElementById('dash-spent');
 const dashRemaining = document.getElementById('dash-remaining');
 const dashRecentList = document.getElementById('dash-recent-list');
+const dashWelcomeText = document.getElementById('dash-welcome-text');
+const tripInfoDisplay = document.getElementById('trip-info-display');
+const displayDestination = document.getElementById('display-destination');
 
-// Budget Handling
+// Budget & Destination Handling
 if (setBudgetBtn) {
     setBudgetBtn.addEventListener('click', () => {
         const val = parseFloat(budgetInput.value);
+        const dest = tripDestinationInput.value.trim();
+        
         if (!isNaN(val) && val > 0) {
             budget = val;
+            destination = dest;
             updateUI();
             budgetInput.value = '';
+            tripDestinationInput.value = '';
         } else {
             alert('Please enter a valid budget amount');
         }
@@ -80,10 +89,21 @@ function updateUI() {
     // Save to localStorage
     localStorage.setItem('tripBudget', budget);
     localStorage.setItem('tripExpenses', JSON.stringify(expenses));
+    localStorage.setItem('tripDestination', destination);
 
     // Update Stats
     const totalExpenses = expenses.reduce((sum, item) => sum + item.amount, 0);
     const remaining = budget - totalExpenses;
+
+    // Update Destination Display
+    if (tripInfoDisplay && displayDestination) {
+        if (destination) {
+            tripInfoDisplay.style.display = 'block';
+            displayDestination.innerText = `Trip to ${destination}`;
+        } else {
+            tripInfoDisplay.style.display = 'none';
+        }
+    }
 
     if (totalBudgetValue) totalBudgetValue.innerText = `${currency} ${budget.toLocaleString()}`;
     if (totalExpensesValue) totalExpensesValue.innerText = `${currency} ${totalExpenses.toLocaleString()}`;
@@ -95,6 +115,10 @@ function updateUI() {
     if (dashRemaining) {
         dashRemaining.innerText = `${currency} ${remaining.toLocaleString()}`;
         dashRemaining.style.color = remaining < 0 ? '#ef4444' : 'var(--accent)';
+    }
+
+    if (dashWelcomeText && destination) {
+        dashWelcomeText.innerText = `Currently exploring ${destination}. You have 2 active trips.`;
     }
 
     // Color feedback for balance
@@ -190,6 +214,9 @@ if (downloadInvoiceBtn) {
         doc.setFont("Helvetica", "bold");
         doc.text("Valued Traveler", 14, 66);
         doc.setFont("Helvetica", "normal");
+        if (destination) {
+            doc.text(`Destination: ${destination}`, 14, 72);
+        }
         
         doc.text("Invoice #:", 140, 60);
         doc.text(`TW-${Date.now().toString().slice(-6)}`, 170, 60);
