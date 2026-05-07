@@ -174,7 +174,37 @@ if (downloadPdfBtn) {
             doc.text("Plan smartly. Travel further. © 2026 TripWallet", 105, 290, { align: 'center' });
         }
 
-        doc.save(`TripWallet_Report_${Date.now()}.pdf`);
+        // Robust download for both Desktop and Mobile
+        try {
+            const fileName = `TripWallet_Report_${Date.now()}.pdf`;
+            
+            // Standard jspdf save
+            doc.save(fileName);
+            
+            // Mobile specific fallback logic
+            const blob = doc.output('blob');
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            link.target = '_blank'; // Helpful for some mobile browsers
+            
+            // For iOS/Safari, sometimes opening in a new tab is the only way
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                window.open(url, '_blank');
+            } else {
+                link.click();
+            }
+            
+            // Cleanup
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 10000);
+            
+        } catch (err) {
+            console.error("PDF download failed:", err);
+            doc.output('dataurlnewwindow');
+        }
     });
 }
 
