@@ -1,6 +1,6 @@
-// Initialize state
-let budget = 0;
-let expenses = [];
+// Initialize state from localStorage
+let budget = parseFloat(localStorage.getItem('tripBudget')) || 0;
+let expenses = JSON.parse(localStorage.getItem('tripExpenses')) || [];
 
 // DOM Elements
 const budgetInput = document.getElementById('budget-input');
@@ -15,6 +15,10 @@ const totalExpensesValue = document.getElementById('total-expenses-value');
 const remainingBalanceValue = document.getElementById('remaining-balance-value');
 const expenseList = document.getElementById('expense-list');
 const downloadInvoiceBtn = document.getElementById('download-invoice-btn');
+const dashBudget = document.getElementById('dash-budget');
+const dashSpent = document.getElementById('dash-spent');
+const dashRemaining = document.getElementById('dash-remaining');
+const dashRecentList = document.getElementById('dash-recent-list');
 
 // Budget Handling
 if (setBudgetBtn) {
@@ -61,6 +65,10 @@ function clearExpenseForm() {
 }
 
 function updateUI() {
+    // Save to localStorage
+    localStorage.setItem('tripBudget', budget);
+    localStorage.setItem('tripExpenses', JSON.stringify(expenses));
+
     // Update Stats
     const totalExpenses = expenses.reduce((sum, item) => sum + item.amount, 0);
     const remaining = budget - totalExpenses;
@@ -68,6 +76,14 @@ function updateUI() {
     if (totalBudgetValue) totalBudgetValue.innerText = `Rs. ${budget.toLocaleString()}`;
     if (totalExpensesValue) totalExpensesValue.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
     if (remainingBalanceValue) remainingBalanceValue.innerText = `Rs. ${remaining.toLocaleString()}`;
+
+    // Sync Dashboard Stats
+    if (dashBudget) dashBudget.innerText = `Rs. ${budget.toLocaleString()}`;
+    if (dashSpent) dashSpent.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+    if (dashRemaining) {
+        dashRemaining.innerText = `Rs. ${remaining.toLocaleString()}`;
+        dashRemaining.style.color = remaining < 0 ? '#ef4444' : 'var(--accent)';
+    }
 
     // Color feedback for balance
     if (remainingBalanceValue) {
@@ -111,6 +127,27 @@ function renderExpenses() {
         `;
         expenseList.appendChild(card);
     });
+
+    // Update Dashboard Recent Activity
+    if (dashRecentList) {
+        dashRecentList.innerHTML = '';
+        if (expenses.length === 0) {
+            dashRecentList.innerHTML = '<p style="color: var(--muted); text-align: center; padding: 2rem;">No recent transactions</p>';
+        } else {
+            expenses.slice(-5).reverse().forEach(expense => {
+                const item = document.createElement('div');
+                item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border);';
+                item.innerHTML = `
+                    <div>
+                        <div style="font-weight: 600;">${expense.name}</div>
+                        <div style="font-size: 0.8rem; color: var(--muted);">${expense.category} • ${expense.date}</div>
+                    </div>
+                    <div style="font-weight: 700; color: #ef4444;">-Rs. ${expense.amount.toLocaleString()}</div>
+                `;
+                dashRecentList.appendChild(item);
+            });
+        }
+    }
 }
 
 // Official Invoice Functionality
@@ -296,3 +333,6 @@ if (slides.length > 0) {
         slides[currentSlide].classList.add('active');
     }, slideInterval);
 }
+
+// Initial UI trigger to load persisted data
+document.addEventListener('DOMContentLoaded', updateUI);
