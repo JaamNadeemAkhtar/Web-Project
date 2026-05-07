@@ -14,7 +14,6 @@ const totalBudgetValue = document.getElementById('total-budget-value');
 const totalExpensesValue = document.getElementById('total-expenses-value');
 const remainingBalanceValue = document.getElementById('remaining-balance-value');
 const expenseList = document.getElementById('expense-list');
-const downloadPdfBtn = document.getElementById('download-pdf-btn');
 const downloadInvoiceBtn = document.getElementById('download-invoice-btn');
 
 // Budget Handling
@@ -83,9 +82,6 @@ function updateUI() {
     }
 
     // Show/Hide Buttons
-    if (downloadPdfBtn) {
-        downloadPdfBtn.style.display = expenses.length > 0 ? 'flex' : 'none';
-    }
     if (downloadInvoiceBtn) {
         downloadInvoiceBtn.style.display = expenses.length > 0 ? 'flex' : 'none';
     }
@@ -114,118 +110,6 @@ function renderExpenses() {
             <div class="expense-amount">-Rs. ${expense.amount.toLocaleString()}</div>
         `;
         expenseList.appendChild(card);
-    });
-}
-
-// PDF Download Functionality
-if (downloadPdfBtn) {
-    downloadPdfBtn.addEventListener('click', () => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        // Header
-        doc.setFontSize(22);
-        doc.setTextColor(124, 58, 237); // Primary Violet
-        doc.text("TripWallet", 14, 20);
-        
-        doc.setFontSize(11);
-        doc.setTextColor(100);
-        doc.text("Smart Tour Planner & Expense Tracker", 14, 27);
-        doc.text(`Date: ${new Date().toLocaleDateString()}`, 160, 27);
-
-        doc.setDrawColor(124, 58, 237);
-        doc.setLineWidth(0.5);
-        doc.line(14, 32, 196, 32);
-
-        // Summary Stats
-        const totalSpent = expenses.reduce((sum, item) => sum + item.amount, 0);
-        const balance = budget - totalSpent;
-
-        doc.setFontSize(14);
-        doc.setTextColor(0);
-        doc.text("Expense Summary", 14, 45);
-
-        doc.setFontSize(11);
-        doc.text(`Total Budget:`, 14, 55);
-        doc.text(`Rs. ${budget.toLocaleString()}`, 60, 55);
-        
-        doc.text(`Total Spent:`, 14, 62);
-        doc.text(`Rs. ${totalSpent.toLocaleString()}`, 60, 62);
-        
-        doc.text(`Remaining Balance:`, 14, 69);
-        doc.setTextColor(balance < 0 ? [239, 68, 68] : [16, 185, 129]); // Red or Green
-        doc.text(`Rs. ${balance.toLocaleString()}`, 60, 69);
-
-        // Expense Table
-        const tableData = expenses.map((exp, index) => [
-            index + 1,
-            exp.name,
-            exp.category,
-            exp.date,
-            `Rs. ${exp.amount.toLocaleString()}`
-        ]);
-
-        doc.autoTable({
-            startY: 80,
-            head: [['#', 'Expense Title', 'Category', 'Date', 'Amount']],
-            body: tableData,
-            theme: 'grid',
-            headStyles: { fillColor: [124, 58, 237], textColor: [255, 255, 255], fontStyle: 'bold' },
-            alternateRowStyles: { fillColor: [249, 250, 251] },
-            margin: { top: 80 }
-        });
-
-        // Footer
-        const pageCount = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= pageCount; i++) {
-            doc.setPage(i);
-            doc.setFontSize(10);
-            doc.setTextColor(150);
-            doc.text(`Page ${i} of ${pageCount}`, 105, 285, { align: 'center' });
-            doc.text("Plan smartly. Travel further. © 2026 TripWallet", 105, 290, { align: 'center' });
-        }
-
-        // Universal Download Method (Windows, Mac, Mobile, iOS)
-        try {
-            const fileName = `TripWallet_Report_${Date.now()}.pdf`;
-            
-            // Generate Blob
-            const blob = doc.output('blob');
-            const url = URL.createObjectURL(blob);
-            
-            // Method 1: standard doc.save() - works on most desktops
-            doc.save(fileName);
-            
-            // Method 2: Link Click Fallback - essential for some mobile/Windows browsers
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = fileName;
-            link.target = '_blank'; 
-            document.body.appendChild(link);
-            
-            // Short delay to ensure doc.save() had its chance but didn't block
-            setTimeout(() => {
-                if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-                    // iOS Safari specifically needs a window.open or direct link interaction
-                    window.open(url, '_blank');
-                } else {
-                    link.click();
-                    document.body.removeChild(link);
-                }
-                
-                // Cleanup URL after a long delay to allow the download to finish
-                setTimeout(() => URL.revokeObjectURL(url), 60000);
-            }, 100);
-
-        } catch (err) {
-            console.error("PDF download failed:", err);
-            // Final attempt: Data URL in new window
-            try {
-                doc.output('dataurlnewwindow');
-            } catch (finalErr) {
-                alert("Download failed. Please try a different browser.");
-            }
-        }
     });
 }
 
