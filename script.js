@@ -1,10 +1,12 @@
 // Initialize state from localStorage
 let budget = parseFloat(localStorage.getItem('tripBudget')) || 0;
 let expenses = JSON.parse(localStorage.getItem('tripExpenses')) || [];
+let currency = localStorage.getItem('tripCurrency') || 'Rs.';
 
 // DOM Elements
 const budgetInput = document.getElementById('budget-input');
 const setBudgetBtn = document.getElementById('set-budget-btn');
+const currencySelect = document.getElementById('currency-select');
 const expenseNameInput = document.getElementById('expense-name');
 const expenseAmountInput = document.getElementById('expense-amount');
 const expenseCategoryInput = document.getElementById('expense-category');
@@ -31,6 +33,16 @@ if (setBudgetBtn) {
         } else {
             alert('Please enter a valid budget amount');
         }
+    });
+}
+
+// Currency Handling
+if (currencySelect) {
+    currencySelect.value = currency;
+    currencySelect.addEventListener('change', (e) => {
+        currency = e.target.value;
+        localStorage.setItem('tripCurrency', currency);
+        updateUI();
     });
 }
 
@@ -73,15 +85,15 @@ function updateUI() {
     const totalExpenses = expenses.reduce((sum, item) => sum + item.amount, 0);
     const remaining = budget - totalExpenses;
 
-    if (totalBudgetValue) totalBudgetValue.innerText = `Rs. ${budget.toLocaleString()}`;
-    if (totalExpensesValue) totalExpensesValue.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
-    if (remainingBalanceValue) remainingBalanceValue.innerText = `Rs. ${remaining.toLocaleString()}`;
+    if (totalBudgetValue) totalBudgetValue.innerText = `${currency} ${budget.toLocaleString()}`;
+    if (totalExpensesValue) totalExpensesValue.innerText = `${currency} ${totalExpenses.toLocaleString()}`;
+    if (remainingBalanceValue) remainingBalanceValue.innerText = `${currency} ${remaining.toLocaleString()}`;
 
     // Sync Dashboard Stats
-    if (dashBudget) dashBudget.innerText = `Rs. ${budget.toLocaleString()}`;
-    if (dashSpent) dashSpent.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+    if (dashBudget) dashBudget.innerText = `${currency} ${budget.toLocaleString()}`;
+    if (dashSpent) dashSpent.innerText = `${currency} ${totalExpenses.toLocaleString()}`;
     if (dashRemaining) {
-        dashRemaining.innerText = `Rs. ${remaining.toLocaleString()}`;
+        dashRemaining.innerText = `${currency} ${remaining.toLocaleString()}`;
         dashRemaining.style.color = remaining < 0 ? '#ef4444' : 'var(--accent)';
     }
 
@@ -123,7 +135,7 @@ function renderExpenses() {
                 <h5>${expense.name}</h5>
                 <span>${expense.category} • ${expense.date}</span>
             </div>
-            <div class="expense-amount">-Rs. ${expense.amount.toLocaleString()}</div>
+            <div class="expense-amount">-${currency} ${expense.amount.toLocaleString()}</div>
         `;
         expenseList.appendChild(card);
     });
@@ -142,7 +154,7 @@ function renderExpenses() {
                         <div style="font-weight: 600;">${expense.name}</div>
                         <div style="font-size: 0.8rem; color: var(--muted);">${expense.category} • ${expense.date}</div>
                     </div>
-                    <div style="font-weight: 700; color: #ef4444;">-Rs. ${expense.amount.toLocaleString()}</div>
+                    <div style="font-weight: 700; color: #ef4444;">-${currency} ${expense.amount.toLocaleString()}</div>
                 `;
                 dashRecentList.appendChild(item);
             });
@@ -190,7 +202,7 @@ if (downloadInvoiceBtn) {
             exp.name,
             exp.category,
             exp.date,
-            `Rs. ${exp.amount.toLocaleString()}`
+            `${currency} ${exp.amount.toLocaleString()}`
         ]);
 
         doc.autoTable({
@@ -208,7 +220,7 @@ if (downloadInvoiceBtn) {
         doc.setFontSize(12);
         doc.setFont("Helvetica", "bold");
         doc.text("Grand Total:", 140, finalY);
-        doc.text(`Rs. ${totalSpent.toLocaleString()}`, 196, finalY, { align: 'right' });
+        doc.text(`${currency} ${totalSpent.toLocaleString()}`, 196, finalY, { align: 'right' });
 
         // Terms and Conditions
         const tcY = finalY + 30;

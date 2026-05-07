@@ -189,7 +189,32 @@
                     <div class="tracker-form">
                         <h3>Plan Your Spending</h3>
                         <div class="input-group">
-                            <label for="budget-input">Initial Budget (Rs)</label>
+                            <label for="currency-select">Select Currency</label>
+                            <select id="currency-select">
+                                <option value="Rs.">PKR (Rs.)</option>
+                                <option value="$">USD ($)</option>
+                                <option value="€">EUR (€)</option>
+                                <option value="£">GBP (£)</option>
+                                <option value="₹">INR (₹)</option>
+                                <option value="¥">JPY (¥)</option>
+                                <option value="A$">AUD (A$)</option>
+                                <option value="C$">CAD (C$)</option>
+                                <option value="CHF">CHF (Fr.)</option>
+                                <option value="¥">CNY (¥)</option>
+                                <option value="د.إ">AED (د.إ)</option>
+                                <option value="﷼">SAR (﷼)</option>
+                                <option value="S$">SGD (S$)</option>
+                                <option value="NZ$">NZD (NZ$)</option>
+                                <option value="R">ZAR (R)</option>
+                                <option value="₩">KRW (₩)</option>
+                                <option value="฿">THB (฿)</option>
+                                <option value="₺">TRY (₺)</option>
+                                <option value="R$">BRL (R$)</option>
+                                <option value="₽">RUB (₽)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="budget-input">Initial Budget</label>
                             <input type="number" id="budget-input" placeholder="e.g. 5000">
                         </div>
                         <button class="btn btn-primary" id="set-budget-btn"
@@ -202,7 +227,7 @@
                             <input type="text" id="expense-name" placeholder="Hotel, Dinner, etc.">
                         </div>
                         <div class="input-group">
-                            <label for="expense-amount">Amount (Rs)</label>
+                            <label for="expense-amount">Amount</label>
                             <input type="number" id="expense-amount" placeholder="0.00">
                         </div>
                         <div class="input-group">
