@@ -15,6 +15,10 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -226,6 +230,10 @@
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-outline" id="download-pdf-btn" style="width: 100%; margin-top: 1.5rem; display: none; border-color: var(--accent); color: var(--accent); justify-content: center;">
+                            <i data-lucide="download" style="margin-right: 0.5rem;"></i>
+                            Download Expense Report (PDF)
+                        </button>
                     </div>
                 </div>
             </div>
