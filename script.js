@@ -15,6 +15,7 @@ const totalExpensesValue = document.getElementById('total-expenses-value');
 const remainingBalanceValue = document.getElementById('remaining-balance-value');
 const expenseList = document.getElementById('expense-list');
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
+const downloadInvoiceBtn = document.getElementById('download-invoice-btn');
 
 // Budget Handling
 if (setBudgetBtn) {
@@ -81,9 +82,12 @@ function updateUI() {
         }
     }
 
-    // Show/Hide Download Button
+    // Show/Hide Buttons
     if (downloadPdfBtn) {
         downloadPdfBtn.style.display = expenses.length > 0 ? 'flex' : 'none';
+    }
+    if (downloadInvoiceBtn) {
+        downloadInvoiceBtn.style.display = expenses.length > 0 ? 'flex' : 'none';
     }
 
     // Update List
@@ -221,6 +225,99 @@ if (downloadPdfBtn) {
             } catch (finalErr) {
                 alert("Download failed. Please try a different browser.");
             }
+        }
+    });
+}
+
+// Official Invoice Functionality
+if (downloadInvoiceBtn) {
+    downloadInvoiceBtn.addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Formal Header
+        doc.setFontSize(28);
+        doc.setTextColor(30, 41, 59); // Dark Slate
+        doc.text("INVOICE", 140, 30);
+        
+        doc.setFontSize(16);
+        doc.setTextColor(124, 58, 237); // Primary Violet
+        doc.text("TripWallet", 14, 25);
+        
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text("Lda Avenue, Lahore", 14, 32);
+        doc.text("Pakistan", 14, 37);
+        doc.text("support@tripwallet.com", 14, 42);
+
+        // Invoice Info
+        doc.setFontSize(11);
+        doc.setTextColor(0);
+        doc.text("Bill To:", 14, 60);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Valued Traveler", 14, 66);
+        doc.setFont("Helvetica", "normal");
+        
+        doc.text("Invoice #:", 140, 60);
+        doc.text(`TW-${Date.now().toString().slice(-6)}`, 170, 60);
+        doc.text("Date:", 140, 66);
+        doc.text(new Date().toLocaleDateString(), 170, 66);
+
+        // Table
+        const totalSpent = expenses.reduce((sum, item) => sum + item.amount, 0);
+        const tableData = expenses.map(exp => [
+            exp.name,
+            exp.category,
+            exp.date,
+            `Rs. ${exp.amount.toLocaleString()}`
+        ]);
+
+        doc.autoTable({
+            startY: 80,
+            head: [['Description', 'Category', 'Date', 'Total']],
+            body: tableData,
+            theme: 'grid',
+            headStyles: { fillColor: [30, 41, 59], textColor: [255, 255, 255] },
+            styles: { fontSize: 10, cellPadding: 5 },
+            columnStyles: { 3: { halign: 'right' } }
+        });
+
+        // Totals
+        const finalY = doc.lastAutoTable.finalY + 10;
+        doc.setFontSize(12);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Grand Total:", 140, finalY);
+        doc.text(`Rs. ${totalSpent.toLocaleString()}`, 196, finalY, { align: 'right' });
+
+        // Terms and Conditions
+        const tcY = finalY + 30;
+        doc.setFontSize(12);
+        doc.setTextColor(30, 41, 59);
+        doc.text("Terms and Conditions", 14, tcY);
+        
+        doc.setFontSize(9);
+        doc.setTextColor(100);
+        doc.setFont("Helvetica", "normal");
+        const tcText = [
+            "1. This document is a generated expense summary for personal record-keeping.",
+            "2. TripWallet is not responsible for the accuracy of manually entered data.",
+            "3. Currency conversions shown are based on the rates at the time of entry.",
+            "4. This is an electronically generated document and does not require a signature.",
+            "5. For support or disputes, please contact hello@tripwallet.com."
+        ];
+        doc.text(tcText, 14, tcY + 7);
+
+        // Footer
+        doc.setFontSize(10);
+        doc.setTextColor(124, 58, 237);
+        doc.text("Thank you for using TripWallet!", 105, 280, { align: 'center' });
+
+        // Universal Download Fallback
+        const fileName = `Invoice_TripWallet_${Date.now()}.pdf`;
+        try {
+            doc.save(fileName);
+        } catch (e) {
+            doc.output('dataurlnewwindow');
         }
     });
 }
