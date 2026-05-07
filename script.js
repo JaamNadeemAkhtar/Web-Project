@@ -17,43 +17,47 @@ const expenseList = document.getElementById('expense-list');
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
 
 // Budget Handling
-setBudgetBtn.addEventListener('click', () => {
-    const val = parseFloat(budgetInput.value);
-    if (!isNaN(val) && val > 0) {
-        budget = val;
-        updateUI();
-        budgetInput.value = '';
-    } else {
-        alert('Please enter a valid budget amount');
-    }
-});
+if (setBudgetBtn) {
+    setBudgetBtn.addEventListener('click', () => {
+        const val = parseFloat(budgetInput.value);
+        if (!isNaN(val) && val > 0) {
+            budget = val;
+            updateUI();
+            budgetInput.value = '';
+        } else {
+            alert('Please enter a valid budget amount');
+        }
+    });
+}
 
 // Expense Handling
-addExpenseBtn.addEventListener('click', () => {
-    const name = expenseNameInput.value;
-    const amount = parseFloat(expenseAmountInput.value);
-    const category = expenseCategoryInput.value;
+if (addExpenseBtn) {
+    addExpenseBtn.addEventListener('click', () => {
+        const name = expenseNameInput.value;
+        const amount = parseFloat(expenseAmountInput.value);
+        const category = expenseCategoryInput.value;
 
-    if (name && !isNaN(amount) && amount > 0) {
-        const expense = {
-            id: Date.now(),
-            name,
-            amount,
-            category,
-            date: new Date().toLocaleDateString()
-        };
-        expenses.push(expense);
-        updateUI();
-        clearExpenseForm();
-    } else {
-        alert('Please fill in all expense details correctly');
-    }
-});
+        if (name && !isNaN(amount) && amount > 0) {
+            const expense = {
+                id: Date.now(),
+                name,
+                amount,
+                category,
+                date: new Date().toLocaleDateString()
+            };
+            expenses.push(expense);
+            updateUI();
+            clearExpenseForm();
+        } else {
+            alert('Please fill in all expense details correctly');
+        }
+    });
+}
 
 function clearExpenseForm() {
-    expenseNameInput.value = '';
-    expenseAmountInput.value = '';
-    expenseCategoryInput.selectedIndex = 0;
+    if (expenseNameInput) expenseNameInput.value = '';
+    if (expenseAmountInput) expenseAmountInput.value = '';
+    if (expenseCategoryInput) expenseCategoryInput.selectedIndex = 0;
 }
 
 function updateUI() {
@@ -61,18 +65,20 @@ function updateUI() {
     const totalExpenses = expenses.reduce((sum, item) => sum + item.amount, 0);
     const remaining = budget - totalExpenses;
 
-    totalBudgetValue.innerText = `Rs. ${budget.toLocaleString()}`;
-    totalExpensesValue.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
-    remainingBalanceValue.innerText = `Rs. ${remaining.toLocaleString()}`;
+    if (totalBudgetValue) totalBudgetValue.innerText = `Rs. ${budget.toLocaleString()}`;
+    if (totalExpensesValue) totalExpensesValue.innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+    if (remainingBalanceValue) remainingBalanceValue.innerText = `Rs. ${remaining.toLocaleString()}`;
 
     // Color feedback for balance
-    const balanceCard = remainingBalanceValue.parentElement;
-    if (remaining < 0) {
-        balanceCard.classList.add('negative');
-        balanceCard.classList.remove('positive');
-    } else if (remaining > 0) {
-        balanceCard.classList.add('positive');
-        balanceCard.classList.remove('negative');
+    if (remainingBalanceValue) {
+        const balanceCard = remainingBalanceValue.parentElement;
+        if (remaining < 0) {
+            balanceCard.classList.add('negative');
+            balanceCard.classList.remove('positive');
+        } else if (remaining > 0) {
+            balanceCard.classList.add('positive');
+            balanceCard.classList.remove('negative');
+        }
     }
 
     // Show/Hide Download Button
@@ -85,6 +91,7 @@ function updateUI() {
 }
 
 function renderExpenses() {
+    if (!expenseList) return;
     expenseList.innerHTML = '';
     
     if (expenses.length === 0) {
@@ -174,36 +181,46 @@ if (downloadPdfBtn) {
             doc.text("Plan smartly. Travel further. © 2026 TripWallet", 105, 290, { align: 'center' });
         }
 
-        // Robust download for both Desktop and Mobile
+        // Universal Download Method (Windows, Mac, Mobile, iOS)
         try {
             const fileName = `TripWallet_Report_${Date.now()}.pdf`;
             
-            // Standard jspdf save
-            doc.save(fileName);
-            
-            // Mobile specific fallback logic
+            // Generate Blob
             const blob = doc.output('blob');
             const url = URL.createObjectURL(blob);
+            
+            // Method 1: standard doc.save() - works on most desktops
+            doc.save(fileName);
+            
+            // Method 2: Link Click Fallback - essential for some mobile/Windows browsers
             const link = document.createElement('a');
             link.href = url;
             link.download = fileName;
-            link.target = '_blank'; // Helpful for some mobile browsers
+            link.target = '_blank'; 
+            document.body.appendChild(link);
             
-            // For iOS/Safari, sometimes opening in a new tab is the only way
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-                window.open(url, '_blank');
-            } else {
-                link.click();
-            }
-            
-            // Cleanup
+            // Short delay to ensure doc.save() had its chance but didn't block
             setTimeout(() => {
-                URL.revokeObjectURL(url);
-            }, 10000);
-            
+                if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                    // iOS Safari specifically needs a window.open or direct link interaction
+                    window.open(url, '_blank');
+                } else {
+                    link.click();
+                    document.body.removeChild(link);
+                }
+                
+                // Cleanup URL after a long delay to allow the download to finish
+                setTimeout(() => URL.revokeObjectURL(url), 60000);
+            }, 100);
+
         } catch (err) {
             console.error("PDF download failed:", err);
-            doc.output('dataurlnewwindow');
+            // Final attempt: Data URL in new window
+            try {
+                doc.output('dataurlnewwindow');
+            } catch (finalErr) {
+                alert("Download failed. Please try a different browser.");
+            }
         }
     });
 }
